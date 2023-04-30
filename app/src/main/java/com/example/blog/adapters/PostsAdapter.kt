@@ -18,6 +18,7 @@ class PostsAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostsAd
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = posts[position]
+        print("posts")
         holder.bind(post)
     }
 

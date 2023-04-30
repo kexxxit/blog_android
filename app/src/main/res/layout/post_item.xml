@@ -3,12 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="300dp">
+
+
 
     <ImageView
         android:id="@+id/postImg"
         android:layout_width="382dp"
         android:layout_height="239dp"
+        android:background="#FFC3C0C0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,8 +24,10 @@
         android:layout_width="383dp"
         android:layout_height="36dp"
         android:layout_marginTop="8dp"
+        android:background="#FFC3C0C0"
         android:text="postText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

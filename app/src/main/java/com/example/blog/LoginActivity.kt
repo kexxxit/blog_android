@@ -18,40 +18,26 @@ import com.example.blog.data.api.Instance
 import com.example.blog.data.database.TokenDatabase
 import com.example.blog.data.database.entities.Token
 import com.example.blog.data.model.LoginResponse
+import com.example.blog.databinding.ActivityAuthBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     lateinit var db: TokenDatabase
         private set
-
-    private lateinit var postAdapter: PostsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        var binding = ActivityMainBinding.inflate(layoutInflater)
+        var binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val recyclerView = binding.postsList
-
-
         db = TokenDatabase.getInstance(this)
 
-        postAdapter = PostsAdapter(emptyList())
-        recyclerView.adapter = postAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        GlobalScope.launch {
-            val posts = Instance.api.getPosts()
-
-            withContext(Dispatchers.Main) {
-                postAdapter = PostsAdapter(posts)
-                recyclerView.adapter = postAdapter
-            }
-
+        /*GlobalScope.launch {
             try {
-                val response = Instance.api.login("kvashevich80@gmail.com", "root")
+                val response = Instance.api.login("kvashevich80@gmail.com", "root1")
                 var token: String? = response.data?.get(0)?.token
                 var isAdmin: Int? = response.data?.get(1)?.isAdmin
                 var email: String? = response.data?.get(1)?.email
@@ -61,7 +47,6 @@ class MainActivity : AppCompatActivity() {
                     if (isAdmin == 1) {
                         binding.NewPostForm.root.visibility= View.VISIBLE
                         binding.textView2.visibility = View.VISIBLE
-                        binding.loginButton.visibility = View.GONE
                     }
                 }
             } catch (e: HttpException) {
@@ -76,6 +61,6 @@ class MainActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-        }
+        }*/
     }
 }

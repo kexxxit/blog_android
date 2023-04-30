@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/kexxxit/AndroidStudioProjects/blog/app/src/main/res/layout/activity_main.xml" value="0.23772609819121446" />
+        <entry key="..\:/Users/kexxxit/AndroidStudioProjects/blog/app/src/main/res/layout/activity_auth.xml" value="0.33" />
+        <entry key="..\:/Users/kexxxit/AndroidStudioProjects/blog/app/src/main/res/layout/activity_main.xml" value="0.40914709517923364" />
+        <entry key="..\:/Users/kexxxit/AndroidStudioProjects/blog/app/src/main/res/layout/auth.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/kexxxit/AndroidStudioProjects/blog/app/src/main/res/layout/new_post_form.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/kexxxit/AndroidStudioProjects/blog/app/src/main/res/layout/post_item.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/kexxxit/AndroidStudioProjects/blog/app/src/main/res/layout/post_item.xml" value="0.5" />
         <entry key="..\:/Users/kexxxit/AndroidStudioProjects/blog/app/src/main/res/layout/top_bar.xml" value="0.358695652173913" />
       </map>
     </option>
