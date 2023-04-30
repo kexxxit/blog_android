@@ -1,9 +1,11 @@
 package com.example.blog
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blog.adapters.PostsAdapter
 import com.example.blog.data.api.ApiService
@@ -51,25 +53,24 @@ class MainActivity : AppCompatActivity() {
             }
 
             try {
-                val response = Instance.api.login("kvashevich80@gmail.com", "root")
-                var token: String? = response.data?.get(0)?.token
-                var isAdmin: Int? = response.data?.get(1)?.isAdmin
-                var email: String? = response.data?.get(1)?.email
-                db.TokenDao().insertToken(Token(authToken = token, isAdmin = isAdmin))
+                val response = Instance.api.getUser()
+                var isAdmin: Int? = response.user?.isAdmin
+                var email: String? = response.user?.email
+                print(email)
                 runOnUiThread {
                     binding.textView2.text = email
                     if (isAdmin == 1) {
                         binding.NewPostForm.root.visibility= View.VISIBLE
-                        binding.textView2.visibility = View.VISIBLE
+
                         binding.loginButton.visibility = View.GONE
                     }
+                    binding.textView2.visibility = View.VISIBLE
                 }
             } catch (e: HttpException) {
                 if (e.code() == 404) {
-                    // Выполняем действия для обработки ошибки 404
-                    // Например, показываем сообщение об ошибке
+
                 } else {
-                    // Обрабатываем другие типы ошибок
+
                 }
             }
         }

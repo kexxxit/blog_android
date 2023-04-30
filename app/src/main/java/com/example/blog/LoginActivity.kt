@@ -32,35 +32,35 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         var binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val intent = Intent(this, MainActivity::class.java)
         db = TokenDatabase.getInstance(this)
 
+        binding.loginButton.setOnClickListener {
+            GlobalScope.launch {
+                try {
+                    val response = Instance.api.login(binding.Email.text.toString(), binding.Password.text.toString())
+                    var token: String? = response.data?.get(0)?.token
+                    var isAdmin: Int? = response.data?.get(1)?.isAdmin
+                    var email: String? = response.data?.get(1)?.email
+                    db.TokenDao().insertToken(Token(authToken = token, isAdmin = isAdmin))
+                    runOnUiThread {
+                        binding.textView.text = email
 
-        /*GlobalScope.launch {
-            try {
-                val response = Instance.api.login("kvashevich80@gmail.com", "root1")
-                var token: String? = response.data?.get(0)?.token
-                var isAdmin: Int? = response.data?.get(1)?.isAdmin
-                var email: String? = response.data?.get(1)?.email
-                db.TokenDao().insertToken(Token(authToken = token, isAdmin = isAdmin))
-                runOnUiThread {
-                    binding.textView2.text = email
-                    if (isAdmin == 1) {
-                        binding.NewPostForm.root.visibility= View.VISIBLE
-                        binding.textView2.visibility = View.VISIBLE
                     }
-                }
-            } catch (e: HttpException) {
-                if (e.code() == 404) {
-                    // Выполняем действия для обработки ошибки 404
-                    // Например, показываем сообщение об ошибке
-                } else {
-                    // Обрабатываем другие типы ошибок
+
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
+                    finish()
+                } catch (e: HttpException) {
+                    if (e.code() == 404) {
+                        runOnUiThread {
+                            binding.textView.text = "Не верно введена почта или пароль"
+                        }
+                    } else {
+                        // Обрабатываем другие типы ошибок
+                    }
                 }
             }
         }
-        binding.loginButton.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }*/
     }
 }
