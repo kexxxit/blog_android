@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
                     var email: String? = response.data?.get(1)?.email
                     db.TokenDao().insertToken(Token(authToken = token, isAdmin = isAdmin))
                     runOnUiThread {
-                        binding.textView.text = email
+                        binding.errorMessage.text = email
 
                     }
 
@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
                 } catch (e: HttpException) {
                     if (e.code() == 404) {
                         runOnUiThread {
-                            binding.textView.text = "Не верно введена почта или пароль"
+                            binding.errorMessage.text = "Не верно введена почта или пароль"
                         }
                     } else {
                         // Обрабатываем другие типы ошибок

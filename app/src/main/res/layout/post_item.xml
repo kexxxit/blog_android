@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp">
+    android:layout_height="300dp"
+    android:layout_margin="5dp">
 
 
 
     <ImageView
         android:id="@+id/postImg"
-        android:layout_width="382dp"
-        android:layout_height="239dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="#FFC3C0C0"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/postText"
+        app:layout_constraintStart_toStartOf="@id/postText"
         app:layout_constraintTop_toBottomOf="@+id/postText"
-        app:layout_constraintVertical_bias="0.022"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/postText"
-        android:layout_width="383dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="#FFC3C0C0"
         android:text="postText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/postImg"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

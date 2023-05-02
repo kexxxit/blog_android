@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         var binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val recyclerView = binding.postsList
+        val recyclerView = binding.postList
 
 
         db = TokenDatabase.getInstance(this)
@@ -58,13 +58,13 @@ class MainActivity : AppCompatActivity() {
                 var email: String? = response.user?.email
                 print(email)
                 runOnUiThread {
-                    binding.textView2.text = email
+                    binding.username.text = email
                     if (isAdmin == 1) {
-                        binding.NewPostForm.root.visibility= View.VISIBLE
+                        binding.groupAuthorized.visibility= View.VISIBLE
 
                         binding.loginButton.visibility = View.GONE
                     }
-                    binding.textView2.visibility = View.VISIBLE
+
                 }
             } catch (e: HttpException) {
                 if (e.code() == 404) {
