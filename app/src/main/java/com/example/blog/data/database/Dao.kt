@@ -1,16 +1,15 @@
 package com.example.blog.data.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.example.blog.data.database.entities.Token
+import androidx.room.*
 
 @Dao
-interface TokenDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertToken(token: Token)
+interface FavoritePostsDao {
+    @Query("SELECT * FROM favorite_posts")
+    fun getAllFavoritePosts(): List<FavoritePost>
 
-    @Query("SELECT * FROM token_table WHERE id = 0")
-    fun getToken(): Token?
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFavoritePost(favoritePost: FavoritePost)
+
+    @Delete
+    fun deleteFavoritePost(favoritePost: FavoritePost)
 }

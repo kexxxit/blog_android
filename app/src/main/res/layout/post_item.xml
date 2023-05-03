@@ -3,21 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="wrap_content"
     android:layout_margin="5dp">
-
-
 
     <ImageView
         android:id="@+id/postImg"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="300dp"
         android:background="#FFC3C0C0"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/addToFavoritesButton"
         app:layout_constraintEnd_toEndOf="@id/postText"
         app:layout_constraintStart_toStartOf="@id/postText"
         app:layout_constraintTop_toBottomOf="@+id/postText"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        android:visibility="visible"/>
 
     <TextView
         android:id="@+id/postText"
@@ -25,9 +24,20 @@
         android:layout_height="wrap_content"
         android:background="#FFC3C0C0"
         android:text="postText"
+        app:layout_constraintBottom_toTopOf="@id/postImg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/postImg"/>
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/addToFavoritesButton"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postImg"
+
+        app:srcCompat="@android:drawable/btn_star_big_off"
+        tools:srcCompat="@android:drawable/btn_star_big_off" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

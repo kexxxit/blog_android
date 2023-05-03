@@ -5,76 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/postImg"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:layout_constraintStart_toStartOf="@id/username"
-        app:layout_constraintTop_toBottomOf="@id/username"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
-
-    <EditText
-        android:id="@+id/postText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:hint="Post text"
-        app:layout_constraintBottom_toBottomOf="@id/postImg"
-        app:layout_constraintStart_toEndOf="@+id/postImg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/postImg"
-        />
-
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="postImg, postText, username,loginButton"
-        />
-
-    <Button
-        android:id="@+id/addPhoto"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Добавить фото"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        app:layout_constraintStart_toStartOf="@id/postImg"
-        app:layout_constraintEnd_toEndOf="@+id/postImg"
-        app:layout_constraintTop_toBottomOf="@id/barrier1"
-        app:layout_constraintBottom_toBottomOf="@id/barrier"/>
-
-
-    <Button
-        android:id="@+id/addPost"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Добавить пост"
-        app:layout_constraintBottom_toBottomOf="@id/addPhoto"
-        app:layout_constraintEnd_toEndOf="@id/postText"
-        app:layout_constraintStart_toStartOf="@id/postText"
-        app:layout_constraintTop_toTopOf="@id/addPhoto"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"
-        />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@id/barrier"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="addPhoto, addPost, loginButton"
-        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postList"
@@ -83,24 +13,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/barrier" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/groupAuthorized"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="username, addPost,addPhoto,postText,postImg"
-        />
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Войти"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/barrier"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="visible"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

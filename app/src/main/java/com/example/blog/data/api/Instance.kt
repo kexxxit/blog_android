@@ -1,7 +1,6 @@
 package com.example.blog.data.api
 
 import com.example.blog.MainActivity
-import com.example.blog.data.database.TokenDatabase
 import com.example.blog.data.model.LoginResponse
 import com.google.gson.GsonBuilder
 import com.google.gson.InstanceCreator

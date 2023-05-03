@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">blog</string>
     <string name="login_button_text">Authorization</string>
+    <string name="delete">Отчистить избранные</string>
 </resources>

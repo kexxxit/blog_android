@@ -1,11 +1,20 @@
 package com.example.blog
 
+import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blog.adapters.PostsAdapter
 import com.example.blog.data.api.ApiService
@@ -17,18 +26,19 @@ import kotlinx.coroutines.withContext
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.blog.data.api.Instance
-import com.example.blog.data.database.TokenDatabase
-import com.example.blog.data.database.entities.Token
+import com.example.blog.data.database.AppDatabase
 import com.example.blog.data.model.LoginResponse
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
-    lateinit var db: TokenDatabase
-        private set
-
+    companion object {
+        lateinit var db: AppDatabase
+    }
     private lateinit var postAdapter: PostsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,9 +46,12 @@ class MainActivity : AppCompatActivity() {
         var binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val recyclerView = binding.postList
+        APP = this
 
-
-        db = TokenDatabase.getInstance(this)
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "my-db"
+        ).build()
 
         postAdapter = PostsAdapter(emptyList())
         recyclerView.adapter = postAdapter
@@ -46,37 +59,10 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             val posts = Instance.api.getPosts()
-
             withContext(Dispatchers.Main) {
-                postAdapter = PostsAdapter(posts)
+                postAdapter = PostsAdapter(posts.reversed())
                 recyclerView.adapter = postAdapter
             }
-
-            try {
-                val response = Instance.api.getUser()
-                var isAdmin: Int? = response.user?.isAdmin
-                var email: String? = response.user?.email
-                print(email)
-                runOnUiThread {
-                    binding.username.text = email
-                    if (isAdmin == 1) {
-                        binding.groupAuthorized.visibility= View.VISIBLE
-
-                        binding.loginButton.visibility = View.GONE
-                    }
-
-                }
-            } catch (e: HttpException) {
-                if (e.code() == 404) {
-
-                } else {
-
-                }
-            }
-        }
-        binding.loginButton.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
         }
     }
 }
