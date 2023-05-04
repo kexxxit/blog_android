@@ -27,6 +27,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.blog.data.api.Instance
 import com.example.blog.data.database.AppDatabase
 import com.example.blog.data.model.LoginResponse
@@ -41,13 +42,16 @@ class MainActivity : AppCompatActivity() {
     companion object {
         lateinit var db: AppDatabase
     }
+    lateinit var binding: ActivityMainBinding
     private lateinit var postAdapter: PostsAdapter
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        var binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val recyclerView = binding.postList
+        swipeRefreshLayout = binding.swipeRefreshLayout
         APP = this
 
         db = Room.databaseBuilder(
@@ -60,11 +64,15 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         GlobalScope.launch {
-            val posts = Instance.api.getPosts()
-            withContext(Dispatchers.Main) {
-                postAdapter = PostsAdapter(posts.reversed())
-                recyclerView.adapter = postAdapter
+            setPosts()
+        }
+
+        swipeRefreshLayout.setOnRefreshListener {
+            postAdapter = PostsAdapter(emptyList())
+            GlobalScope.launch {
+                setPosts()
             }
+            swipeRefreshLayout.isRefreshing = false
         }
     }
 
@@ -86,5 +94,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    suspend fun setPosts() {
+
+            val posts = Instance.api.getPosts()
+            withContext(Dispatchers.Main) {
+                postAdapter = PostsAdapter(posts.reversed())
+                binding.postList.adapter = postAdapter
+            }
+
     }
 }
