@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -64,5 +66,25 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.adapter = postAdapter
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.nav_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.add -> {
+                val intent = Intent(this, FavoritesActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.delete -> {
+                GlobalScope.launch {
+                    db.postDao().deleteFavoritePosts()
+                }
+            }
+        }
+        return true
     }
 }

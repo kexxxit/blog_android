@@ -10,6 +10,6 @@ interface FavoritePostsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFavoritePost(favoritePost: FavoritePost)
 
-    @Delete
-    fun deleteFavoritePost(favoritePost: FavoritePost)
+    @Query("DELETE FROM favorite_posts")
+    fun deleteFavoritePosts()
 }
