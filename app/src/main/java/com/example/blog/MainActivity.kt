@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -96,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    suspend fun setPosts() {
+    private suspend fun setPosts() {
 
             val posts = Instance.api.getPosts()
             withContext(Dispatchers.Main) {
