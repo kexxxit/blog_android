@@ -37,25 +37,4 @@ class FavoritesActivity : AppCompatActivity() {
             }
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.nav_menu, menu)
-
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.add -> {
-
-            }
-            R.id.delete -> {
-                Toast.makeText(this, "Button delete", Toast.LENGTH_SHORT).show()
-                return true
-            }
-        }
-        return true
-    }
-
-
 }

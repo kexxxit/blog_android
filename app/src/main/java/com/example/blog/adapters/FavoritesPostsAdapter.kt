@@ -40,18 +40,7 @@ class FavoritesPostsAdapter(private val posts: List<FavoritePost>) :
             } else {
                 binding.postImg.visibility = View.GONE
             }
-            binding.addToFavoritesButton.setOnClickListener {
-                val favoritePost = FavoritePost(
-                    postId = post.postId,
-                    postImg = post.postImg,
-                    postText = post.postText
-                )
-                GlobalScope.launch {
-                    val dao = MainActivity.db.postDao()
-                    dao.insertFavoritePost(favoritePost)
-                }
-                Toast.makeText(APP, "Запись добавлена в избранные", Toast.LENGTH_SHORT).show();
-            }
+            binding.addToFavoritesButton.visibility = View.GONE
         }
     }
 }
